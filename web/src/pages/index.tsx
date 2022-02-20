@@ -1,9 +1,9 @@
-import styles from './index.less';
+import Header from '../components/Header';
+import EatParameters from "@/components/EatParameters";
+import {Tabs} from "antd-mobile";
+import style from "./index.less";
+import { history } from 'umi';
 
 export default function IndexPage() {
-  return (
-    <div className={styles.titleContainer}>
-      <h1 className={styles.title}>吃什么</h1>
-    </div>
-  );
+  return <EatParameters/>
 }

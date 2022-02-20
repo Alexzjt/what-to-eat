@@ -20,6 +20,7 @@
     ]
   },
   "dependencies": {
+    "@umijs/plugin-antd-mobile": "^1.2.0",
     "antd-mobile": "^5.0.0-rc.26",
     "react": "17.x",
     "react-dom": "17.x",

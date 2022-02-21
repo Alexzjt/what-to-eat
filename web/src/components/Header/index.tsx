@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <div className={styles.titleContainer}>
       <h1 className={styles.title}>吃什么</h1>
-      {dishName && <span>今天推荐：{dishName}</span>}
+      {dishName && <span>今日推荐：{dishName}</span>}
     </div>
   );
 }

@@ -13,7 +13,7 @@ export default function Layout({ children, location, route, history, match }: IR
   return (
     <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
       <Header/>
-      <div style={{flex: 1}}>{children}</div>
+      <div style={{flex: 1, padding: '24px',background: "#8080800f"}}>{children}</div>
       <Tabs onChange={key => navi(key)}>
         <Tabs.Tab title='菜谱' key='cookbook'/>
         <Tabs.Tab title='记录' key='record'/>

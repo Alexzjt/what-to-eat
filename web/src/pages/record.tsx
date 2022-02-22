@@ -1,3 +1,7 @@
+import DateRecord from '@/components/DateRecord';
+
 export default function () {
-  return <h1>record</h1>
+  return (
+    <DateRecord></DateRecord>
+  )
 }

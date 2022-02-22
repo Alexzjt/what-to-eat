@@ -7,7 +7,7 @@ export default () => {
   const [number, setNumber] = useState(defaultNumber);
   const onFinish = () => {
     console.log(`checked = ${checked}, number = ${number}`);
-    history.push(`/cookbook/result`);
+    history.push(`/recommend/result`);
   };
 
   return (

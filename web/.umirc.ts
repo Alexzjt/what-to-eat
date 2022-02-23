@@ -9,4 +9,11 @@ export default defineConfig({
   },
   fastRefresh: {},
   styles: [`html { touch-action: manipulation; }`, `#root {height: 100%;}`],
+  proxy: {
+    '/api': {
+      'target': 'http://localhost:3000/',
+      'changeOrigin': true,
+      'pathRewrite': { '^/api' : '' },
+    },
+  },
 });

@@ -1,35 +1,29 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import {Badge, SideBar} from 'antd-mobile'
 import styles from './index.less';
 import ChooseDish from '@/components/ChooseDish';
+import {useDispatch, useSelector} from "@@/plugin-dva/exports";
+import {useMount} from "ahooks";
 export default () => {
-  const tabs = [
-    {
-      key: 'key1',
-      title: '选项一',
-      badge: Badge.dot,
-    },
-    {
-      key: 'key2',
-      title: '选项二',
-      badge: '5',
-    },
-    {
-      key: 'key3',
-      title: '选项三',
-      badge: '99+',
-      disabled: true,
-    },
-  ]
+  const {currentCategory, withDishes} = useSelector((state: any) => state.category);
+  const dispatch = useDispatch();
+  useMount(() => dispatch({type: "category/getCategoriesWithDishes"}));
   return (
     <div className={styles.flexContainer}>
-      <SideBar>
-        {tabs.map(item => (
-          <SideBar.Item key={item.key} title={item.title} />
+      <SideBar
+        activeKey={`${currentCategory?.id}`}
+        onChange={(key: string) => {
+        const [current] = withDishes.filter(item => item.id==key);
+        dispatch({type: "category/setCurrentCategory", payload: current})
+      }}>
+        {withDishes?.map(item => (
+          <SideBar.Item key={`${item.id}`} title={item.name} />
         ))}
       </SideBar>
       <div className={styles.dishesContainer}>
-        <ChooseDish></ChooseDish>
+        {currentCategory?.dishes?.map(item => {
+          return <ChooseDish key={`${item.id}`} dish={item}/>;
+        })}
       </div>
     </div>
   );

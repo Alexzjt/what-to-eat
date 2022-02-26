@@ -14,6 +14,7 @@ export default function Layout({ children, location, route, history, match }: IR
         <Tabs.Tab title='推荐' key='recommend'/>
         <Tabs.Tab title='美食' key='all'/>
         <Tabs.Tab title='记录' key='record'/>
+        <Tabs.Tab title='管理' key='manage'/>
       </Tabs>
     </>
   );

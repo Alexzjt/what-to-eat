@@ -32,7 +32,7 @@ export default function (props: any) {
           }}
         />
       </Form.Item>
-      <Form.Item name='eatTime' label='最近食用时间'>
+      <Form.Item label='最近食用时间'>
         <span>{dayjs(lastEatTime).format(`YYYY年MM月DD`)}</span>
         &nbsp;&nbsp;
         <a onClick={e => {
@@ -46,7 +46,7 @@ export default function (props: any) {
           });
         }}>选择</a>
       </Form.Item>
-      <Form.Item name='category' label='分类'>
+      <Form.Item label='分类'>
         <span>{category.name}</span>
         &nbsp;&nbsp;
         <a onClick={e => {

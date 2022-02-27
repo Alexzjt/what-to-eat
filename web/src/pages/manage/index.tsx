@@ -10,7 +10,7 @@ import EditCategory from "@/components/EditCategory";
 import {useMount} from "ahooks";
 
 export default function () {
-  const [currentItem, setCurrentItem] = useState(null);
+  let currentItem = null;
   const {currentType, records, dishes, categories} = useSelector((state: any) => state.manage);
   const dispatch = useDispatch();
   useMount(() => {
@@ -30,15 +30,34 @@ export default function () {
         return dishes;
     }
   }
+  const editDish = (e: any) => {
+    const editDishModal = Modal.show({
+      content: (<EditDish dish={currentItem} categories={categories} saveFn={saveDish}/>),
+      closeOnMaskClick: true
+    });
+    function saveDish(dish: any) {
+      dispatch({type: `manage/postDishes`, payload: dish});
+      editDishModal.close();
+    }
+  };
+
+  const editCategory = (e: any) => {
+    const editCategoryModal = Modal.show({
+      content: (<EditCategory category={currentItem} saveFn={saveCategory}/>),
+      closeOnMaskClick: true
+    });
+    function saveCategory(category: any) {
+      dispatch({type: `manage/postCategories`, payload: category});
+      editCategoryModal.close();
+    }
+  };
 
   const handler = useRef<ActionSheetRef>()
 
   const modifyProp = {
     text: '修改',
     key: 'edit',
-    onClick: () => {
-      handler.current?.close()
-    },
+    onClick: currentType?.key === 'Dishes' ? editDish : editCategory,
   };
   const deleteProp = {
     text: '删除',
@@ -79,28 +98,6 @@ export default function () {
     deleteProp
   ];
 
-  const editDish = (e: any) => {
-    const editDishModal = Modal.show({
-      content: (<EditDish dish={currentItem} categories={categories} saveFn={saveDish}/>),
-      closeOnMaskClick: true
-    });
-    function saveDish(dish: any) {
-      dispatch({type: `manage/postDishes`, payload: dish});
-      editDishModal.close();
-    }
-  };
-
-  const editCategory = (e: any) => {
-    const editCategoryModal = Modal.show({
-      content: (<EditCategory category={currentItem} saveFn={saveCategory}/>),
-      closeOnMaskClick: true
-    });
-    function saveCategory(category: any) {
-      dispatch({type: `manage/postCategories`, payload: category});
-      editCategoryModal.close();
-    }
-  };
-
   return (
     <div className={styles.flexContainer}>
       <SideBar
@@ -119,8 +116,7 @@ export default function () {
         <List header={`${currentType.name}展示`}>
           {getCurrentList().map((d: any) => <List.Item key={String(d.id)}
                                                        onClick={() => {
-                                                         setCurrentItem(d);
-                                                         console.log(currentItem);
+                                                         currentItem = d;
                                                          handler.current = ActionSheet.show({
                                                            actions,
                                                            onClose: () => {

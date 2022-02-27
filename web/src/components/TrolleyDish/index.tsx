@@ -7,7 +7,7 @@ export default function (props) {
     <Badge content={<CloseCircleOutline onClick={() => {
       removeFn(index)
     }}/>} color='#1677ff'>
-      <Tag color='default' fill='outline' style={{marginLeft: '12px'}}>{dish.name}</Tag>
+      <Tag color='default' fill='outline' style={{marginLeft: '12px', marginBottom: '12px'}}>{dish.name}</Tag>
     </Badge>
   );
 }

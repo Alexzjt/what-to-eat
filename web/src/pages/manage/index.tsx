@@ -112,8 +112,10 @@ export default function () {
         ))}
       </SideBar>
       <div className={styles.manageContainer}>
-        <span className={styles.addBtn} onClick={currentType?.key === 'Dishes' ? editDish : editCategory}><AddCircleOutline/></span>
-        <List header={`${currentType.name}展示`}>
+        <List header={<div>
+          <span>{`${currentType.name}展示`}</span>
+          <span className={styles.addBtn} onClick={currentType?.key === 'Dishes' ? editDish : editCategory}><AddCircleOutline/></span>
+        </div>}>
           {getCurrentList().map((d: any) => <List.Item key={String(d.id)}
                                                        onClick={() => {
                                                          currentItem = d;

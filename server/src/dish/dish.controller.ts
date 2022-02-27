@@ -26,4 +26,10 @@ export class DishController {
     deleteDishById(@Param() params) {
         return this.dishService.remove(params.id);
     }
+
+    @Get("random")
+    getRandom() {
+        return this.dishService.getRandom();
+    }
 }
+

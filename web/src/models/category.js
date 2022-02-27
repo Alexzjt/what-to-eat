@@ -4,7 +4,8 @@ export default {
   namespace: 'category',
   state: {
     withDishes: [],
-    currentCategory: {}
+    currentCategory: {},
+    trolley: []
   },
   reducers: {
     setWithDishes(state, action) {
@@ -17,6 +18,27 @@ export default {
       return {
         ...state,
         currentCategory: action.payload
+      }
+    },
+    addDishToTrolley(state, action) {
+      const {trolley} = state;
+      if (trolley.find(d => d.id === action.payload.id)) {
+        return state;
+      }
+      return {
+        ...state,
+        trolley: trolley.concat(action.payload)
+      }
+    },
+    removeDishFromTrolley(state, action) {
+      const {trolley} = state;
+      if (action.payload < 0) {
+        return state;
+      }
+      trolley.splice(action.payload,1);
+      return {
+        ...state,
+        trolley: trolley.slice()
       }
     }
   },

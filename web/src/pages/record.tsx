@@ -8,6 +8,6 @@ export default function () {
   const dispatch = useDispatch();
   useMount(() => dispatch({type: "record/getRecords"}));
   return (
-    list?.map(record => <DateRecord key={String(record.id)}></DateRecord>)
+    list?.map(record => <DateRecord key={String(record.id)} record={record}></DateRecord>)
   )
 }

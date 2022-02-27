@@ -11,7 +11,7 @@ export class RecordService {
     ) {}
 
     findAll(): Promise<Record[]> {
-        return this.recordRepository.find();
+        return this.recordRepository.find({relations: ['dishes']});
     }
 
     findOne(id: string): Promise<Record> {

@@ -4,7 +4,7 @@ export function getRecords() {
 }
 
 export function postRecords(data) {
-  return request.get(`/api/records`, {data});
+  return request.post(`/api/records`, {data});
 }
 
 export function deleteRecords(id) {

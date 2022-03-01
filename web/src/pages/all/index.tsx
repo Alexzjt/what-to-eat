@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {ActionSheet, Badge, Button, Empty, SideBar, Tag} from 'antd-mobile'
+import {ActionSheet, Badge, Button, Empty, SideBar, Tag, Toast} from 'antd-mobile'
 import styles from './index.less';
 import ChooseDish from '@/components/ChooseDish';
 import {useDispatch, useSelector} from "@@/plugin-dva/exports";
@@ -12,9 +12,8 @@ export default () => {
   const dispatch = useDispatch();
   useMount(() => dispatch({type: "category/getCategoriesWithDishes"}));
 
-  function removeDishFromTrolley(index: number) {
-    dispatch({type: 'category/removeDishFromTrolley', payload: index})
-    console.log(trolley)
+  function setTrolley(trolleyState: any) {
+    dispatch({type: 'category/setTrolley', payload: trolleyState})
   }
 
   function submitFn(record: any) {
@@ -22,6 +21,8 @@ export default () => {
         eatTime: new Date(),
         dishes: trolley
       }});
+    handler.current?.close();
+    Toast.show('保存用餐记录成功')
   }
 
   return (
@@ -43,7 +44,7 @@ export default () => {
       </div>
       <Tag round color='#2db7f5' className={styles.trolley} onClick={()=> {
         handler.current = ActionSheet.show({
-          extra: (<Trolley trolley={trolley} removeFn={removeDishFromTrolley} submitFn={submitFn}/>),
+          extra: (<Trolley trolley={trolley} setFn={setTrolley} submitFn={submitFn}/>),
           actions: []
         })
       }}>

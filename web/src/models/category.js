@@ -20,6 +20,9 @@ export default {
         currentCategory: action.payload
       }
     },
+    setTrolley(state, action) {
+      return {...state, trolley: action.payload};
+    },
     addDishToTrolley(state, action) {
       const {trolley} = state;
       if (trolley.find(d => d.id === action.payload.id)) {

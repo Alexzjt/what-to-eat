@@ -13,6 +13,7 @@ export default function () {
   let currentItem = null;
   const {currentType, records, dishes, categories} = useSelector((state: any) => state.manage);
   const dispatch = useDispatch();
+  const handler = useRef<ActionSheetRef>()
   useMount(() => {
     dispatch({type: `manage/getDishes`});
     dispatch({type: `manage/getCategories`});
@@ -38,6 +39,7 @@ export default function () {
     function saveDish(dish: any) {
       dispatch({type: `manage/postDishes`, payload: dish});
       editDishModal.close();
+      handler.current?.close();
     }
   };
 
@@ -49,10 +51,9 @@ export default function () {
     function saveCategory(category: any) {
       dispatch({type: `manage/postCategories`, payload: category});
       editCategoryModal.close();
+      handler.current?.close();
     }
   };
-
-  const handler = useRef<ActionSheetRef>()
 
   const modifyProp = {
     text: '修改',

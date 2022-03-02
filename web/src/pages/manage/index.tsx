@@ -115,7 +115,14 @@ export default function () {
       <div className={styles.manageContainer}>
         <List header={<div>
           <span>{`${currentType.name}展示`}</span>
-          <span className={styles.addBtn} onClick={currentType?.key === 'Dishes' ? editDish : editCategory}><AddCircleOutline/></span>
+          <span className={styles.addBtn} onClick={e => {
+            currentItem = {};
+            if (currentType?.key === 'Dishes') {
+              return editDish(e);
+            } else {
+              return editCategory(e);
+            }
+          }}><AddCircleOutline/></span>
         </div>}>
           {getCurrentList().map((d: any) => <List.Item key={String(d.id)}
                                                        onClick={() => {

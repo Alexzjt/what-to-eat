@@ -20,7 +20,7 @@ export default function (props: any) {
       </>
     }>
       <Form.Header>菜品管理</Form.Header>
-      <Form.Item label='菜名' name={'name'}
+      <Form.Item label='菜名'
                  rules={[{required: true, message: '菜名不能为空'}]}>
         <Input placeholder='请输入' value={name} onChange={value => setName(value)}/>
       </Form.Item>

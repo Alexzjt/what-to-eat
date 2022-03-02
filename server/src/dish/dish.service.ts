@@ -11,7 +11,7 @@ export class DishService {
     ) {}
 
     findAll(): Promise<Dish[]> {
-        return this.dishRepository.find();
+        return this.dishRepository.find({relations: ['category']});
     }
 
     findOne(id: string): Promise<Dish> {

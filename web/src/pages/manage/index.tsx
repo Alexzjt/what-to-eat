@@ -69,7 +69,9 @@ export default function () {
         content: '确定要删除吗？',
         closeOnMaskClick: true,
         onConfirm: () => {
-
+          dispatch({type: `manage/delete${currentType?.key}`, payload: currentItem.id});
+          Toast.show(`删除${currentItem.name}成功`);
+          handler.current?.close();
         }
       })
     }

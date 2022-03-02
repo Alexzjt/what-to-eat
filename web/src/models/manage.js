@@ -1,4 +1,13 @@
-import {getCategories, getDishes, getRecords, postCategories, postDishes, postRecords} from "@/services";
+import {
+  deleteCategories,
+  deleteDishes,
+  getCategories,
+  getDishes,
+  getRecords,
+  postCategories,
+  postDishes,
+  postRecords
+} from "@/services";
 import {manageTypeList} from "@/utils";
 
 export default {
@@ -59,6 +68,14 @@ export default {
     *postRecords(action, {put, call}) {
       const result = yield call(postRecords, action.payload);
       yield put({type: 'getRecords'});
+    },
+    *deleteDishes(action, {put, call}) {
+      const result = yield call(deleteDishes, action.payload);
+      yield put({type: 'getDishes'});
+    },
+    *deleteCategories(action, {put, call}) {
+      const result = yield call(deleteCategories, action.payload);
+      yield put({type: 'getCategories'});
     }
   }
 }
